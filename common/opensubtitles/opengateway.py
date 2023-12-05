@@ -2,16 +2,24 @@ import os
 import requests
 import json
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
+env_username = os.getenv('OPEN_SUBTITLES_USERNAME')
+env_password = os.getenv('OPEN_SUBTITLES_PASSWORD')
+env_api_key = os.getenv('OPEN_SUBTITLES_API_KEY')
+env_user_agent = os.getenv('OPEN_SUBTITLES_USER_AGENT')
+
+# unnecessary but may be modified later
+username = f'{env_username}'
+password = f'{env_password}'
+api_key = f'{env_api_key}'
+user_agent = f'{env_user_agent}'
+
 def login():
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    with open(os.path.join(script_dir ,"../../appsettings.json")) as f:
-        config = json.load(f)
 
     url = 'https://api.opensubtitles.com/api/v1/login'
-    user_agent = config["opensubtitles"]["userAgent"]
-    username = config["opensubtitles"]["username"]
-    password = config["opensubtitles"]["password"]
-    api_key = config["opensubtitles"]["apiKey"]
     body = {'username': username, 'password': password}
     headers = {'User-Agent': user_agent,'Content-Type': 'application/json', 'Accept': "application/json", 'Api-Key': api_key}
     login_response = requests.post(url, data=json.dumps(body), headers=headers)
@@ -22,14 +30,8 @@ def login():
         return None
 
 def load_data(file_name):
-    # build login request
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    with open(os.path.join(script_dir ,"../../appsettings.json")) as f:
-        config = json.load(f)
 
     url = f'https://api.opensubtitles.com/api/v1/utilities/guessit?filename={file_name}'
-    api_key = config["opensubtitles"]["apiKey"]
-    user_agent = config["opensubtitles"]["userAgent"]
     login_headers = {'User-Agent': user_agent,'Content-Type': 'application/json', 'Accept': "application/json", 'Api-Key': api_key}
     
     login_response = requests.get(url, headers=login_headers)
@@ -50,13 +52,8 @@ def get_subtitle_by_query(query_params, language):
     Returns:
         dict or None: A dictionary containing the subtitle information if found, otherwise None.
     """
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    with open(os.path.join(script_dir ,"../../appsettings.json")) as f:
-        config = json.load(f)
 
     url = f'https://api.opensubtitles.com/api/v1/subtitles?'
-    api_key = config["opensubtitles"]["apiKey"]
-    user_agent = config["opensubtitles"]["userAgent"]
     headers = {'User-Agent': user_agent,'Content-Type': 'application/json', 'Accept': "application/json", 'Api-Key': api_key}
     query = {'query' : query_params['title'], 'year' : query_params['year'], 'languages': language, 'order_by': 'download_count', 'order_direction': 'desc'}
     
@@ -80,14 +77,11 @@ def download_subtitles(subtitle_id, destination):
     Returns:
         None
     """
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    with open(os.path.join(script_dir ,"../../appsettings.json")) as f:
-        config = json.load(f)
 
     url = f'https://api.opensubtitles.com/api/v1/download'
-    api_key = config["opensubtitles"]["apiKey"]
+    
     api_token = login()
-    user_agent = config["opensubtitles"]["userAgent"]
+    
     headers = {'User-Agent': user_agent,'Content-Type': 'application/json', 'Accept': "application/json", 'Api-Key': api_key, 'Authorization': f'Bearer {api_token}'}
     body = {'file_id': subtitle_id}
 
