@@ -52,7 +52,7 @@ OPEN_SUBTITLES_USER_AGENT = "--user agent--"
 5. Inside qBittorrent interface create 2 main categories: Movies and Series
 6. Configure qBittorrent to run external program on torrent completion.
 ![Qbittorrent external configuration](https://github.com/2162362/rpi-torrent-management-2.0/assets/44852796/d3e95396-cd3b-4b97-8786-f3a20053c9b2)
-> type in the textbox /usr/bin/bash/ /path/to/manage_torrent.sh "%L" "%R" "%N"
+> type in the textbox /usr/bin/bash /path/to/manage_torrent.sh "%L" "%R" "%N"
 7. Press "Save"
 8. When downloading a torrent select the appropriate category
 9. The torrent should automatically download and into specified directory from *appsettings.json*
