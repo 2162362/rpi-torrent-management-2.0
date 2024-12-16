@@ -43,10 +43,10 @@ With the permissions set and packages installed, your Raspberry Pi is now ready 
 3. Configure .env file in project's root with correct Opensubtitles API key, username, password and user agent
 ```
 # environment variables
-OPEN_SUBTITLES_USERNAME = "mstratan68"
-OPEN_SUBTITLES_PASSWORD = "joseMourinho68?"
-OPEN_SUBTITLES_API_KEY = "yxaY8DEq51d01FMXWyjW1nf7DSqJZuAR"
-OPEN_SUBTITLES_USER_AGENT = "MihailAppv2"
+OPEN_SUBTITLES_USERNAME = "--username--"
+OPEN_SUBTITLES_PASSWORD = "--password--"
+OPEN_SUBTITLES_API_KEY = "--api key---"
+OPEN_SUBTITLES_USER_AGENT = "--user agent--"
 ```
 4. Install and configure qBittorrent
 5. Inside qBittorrent interface create 2 main categories: Movies and Series
