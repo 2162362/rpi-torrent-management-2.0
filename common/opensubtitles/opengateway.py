@@ -1,3 +1,4 @@
+import sys
 import os
 import requests
 import json
@@ -91,3 +92,4 @@ def download_subtitles(subtitle_id, destination):
     print(destination)
     with open(destination, 'wb') as f:
         f.write(subtitle_binary)
+ 

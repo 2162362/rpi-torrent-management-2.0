@@ -20,8 +20,6 @@ def copy_file(file_source):
 
     destination = config["directories"]["movies"]
     os.system(f"cp -r {file_source} {destination}")
-    #log_file.write(f"{date_string}: {file_source} was copied to {destination}\n")
-    #log_file.close()
 
 def get_subtitles(file_source, file_name):
     script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -32,6 +30,7 @@ def get_subtitles(file_source, file_name):
     destination = os.path.join(config["directories"]["movies"], file_name)
 
     media_file = file_utils.find_media_file_with_fuzzy_matching(destination, file_name)[0]
+
     file_id = managesubtitles.search_subtitles(file_name, "pt-PT")
     if file_id is not None:
         modified_media_file = file_utils.modify_file_extension(media_file, ".pt", ".srt")
@@ -50,6 +49,6 @@ if __name__ == "__main__":
         file_source = sys.argv[1]
         file_name = sys.argv[2]
         copy_file(file_source)
-        get_subtitles(file_source, file_name)
+        #get_subtitles(file_source, file_name)
     except Exception as e:
         print(e)

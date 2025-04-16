@@ -34,6 +34,8 @@ def find_media_file_with_fuzzy_matching(directory, target_name, threshold=80):
     """
     matching_files = []
 
+    directory = directory.replace("\\", "")
+
     for root, dirs, files in os.walk(directory):
         for file in files:
             # Perform fuzzy string matching between the target name and the file name
