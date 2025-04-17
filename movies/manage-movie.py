@@ -9,7 +9,6 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../c
 import file_utils
 
 def copy_file(file_source):
-    date_string = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     script_dir = os.path.dirname(os.path.abspath(__file__))
     parent_dir = os.path.dirname(script_dir)
     with open(os.path.join(parent_dir ,"appsettings.json")) as f:
