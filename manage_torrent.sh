@@ -10,15 +10,12 @@ games_script="$script_dir/games/manage-game.py"
 file_type=$1
 file_source=$2
 file_name=$3
-
 if [ "$file_type" == "Movies" ]; then
-    python $movies_script "$file_source" "$file_name"
+	python $movies_script "$file_source" "$file_name" 
 elif [ "$file_type" == "Series" ]; then
-    python $series_script "$file_source" "$file_name"
+	python $series_script "$file_source" "$file_name"
 elif [ "$file_type" == "Games" ]; then
-    python $games_script "$file_source" "$file_name"
+	python $games_script "$file_source" "$file_name"
 else
-    echo "Unknown file type: $file_type"
+	echo "Unknown file type: $file_type"
 fi
-
-#python /home/pi/manage_torrent.py "$file_type" "$file_source" "$file_name"
