@@ -1,9 +1,14 @@
 import sys
 import os
 import traceback
+import json
 
 def write_log(message):
-    log_file_path = "/mnt/mitsai/torrents/logs.txt"
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    parent_dir = os.path.dirname(script_dir)
+    with open(os.path.join(parent_dir, "appsettings.json")) as f:
+        config = json.load(f)
+    log_file_path = config["directories"]["logs"]
     with open(log_file_path, "a+") as log_file:
         log_file.write(message + "\n")
 
