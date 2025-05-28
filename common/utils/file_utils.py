@@ -44,6 +44,13 @@ def find_media_file_with_fuzzy_matching(directory, target_name, threshold=80):
             # Adjust the threshold as needed; the default is 80 for a decent match
             if similarity >= threshold:
                 matching_files.append(os.path.join(root, file))
+    
+    # If no matches found, try to match the directory name
+    if len(matching_files) == 0:
+        target_name = directory.rstrip("/").split("/")[-1]
+        fallback = find_media_file_with_fuzzy_matching(directory, target_name)
+        if len(fallback) > 0:
+            matching_files = fallback
 
     return matching_files
 
